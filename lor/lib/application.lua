@@ -82,7 +82,7 @@ function App:handle(req, res, callback)
     local done = callback or function(err)
         if err then
             print(err)
-            res:status(500):_send("internal error! please check log.")
+            res:status(500):send("internal error! please check log.")
         end
     end
 
