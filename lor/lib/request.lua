@@ -11,7 +11,7 @@ function Request:new()
     local body = {} -- body params
     local headers = gluaweb.RequestHeader()
 
-    local body_raw = gluaweb.RequestBody()
+    local body_raw
 
     local header = headers['Content-Type']
     -- the post request have Content-Type header set
@@ -24,6 +24,7 @@ function Request:new()
                 end
             end
         elseif sfind(header, "application/json", 1, true) then
+            body_raw = gluaweb.RequestBody()
             local json_str = body_raw
             body = utils.json_decode(json_str)
         -- form-data request
@@ -31,6 +32,7 @@ function Request:new()
             -- upload request, should not invoke ngx.req.read_body()
         -- parsed as raw by default
         else
+            body_raw = gluaweb.RequestBody()
             body = body_raw
         end
     -- the post request have no Content-Type header set will be parsed as x-www-form-urlencoded by default

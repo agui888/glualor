@@ -13,7 +13,7 @@ var luaPool = pool.New(func() *lua.LState {
 	L := lua.NewState()
 	luajson.Preload(L)
 	L.PreloadModule("template", gluatemplate.Loader)
-	if err := L.DoFile("main.lua"); err != nil {
+	if err := L.DoFile("./app/main.lua"); err != nil {
 		panic(err)
 	}
 	return L
@@ -38,5 +38,7 @@ func ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", ServeHTTP)
+	fsh := http.FileServer(http.Dir("./app/static"))
+	http.Handle("/static/", http.StripPrefix("/static/", fsh))
 	http.ListenAndServe(":8080", nil)
 }

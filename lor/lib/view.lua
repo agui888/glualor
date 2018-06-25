@@ -35,7 +35,7 @@ function View:render(view_file, data)
     if not self.view_enable then
         print("view is not enabled. you may need `app:conf('view enable', true)`")
     else
-        local view_file_name = view_file .. "." .. self.view_ext
+        local view_file_name = self.views .. "/" .. view_file .. "." .. self.view_ext
         -- local layout_file_name = self.view_layout .. "." .. self.view_ext
 
         local text, err = template.dofile(view_file_name, data)
