@@ -6,7 +6,7 @@ local router = require("app.router")
 app = lor()
 
 app:conf("view enable", true)
-app:conf("view engine", "tmpl")
+-- app:conf("view engine", "tmpl")
 app:conf("view ext", "html")
 app:conf("views", "app/views")
 

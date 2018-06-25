@@ -25,3 +25,21 @@ go build main.go
 ## description
 
 这是一个在Gopher Lua中运行OpenResty lor框架的实例
+
+```
+├─app // 来至 github.com/lorlabs/lor-example
+│  ├─config
+│  ├─middleware
+│  ├─model
+│  ├─routes
+│  ├─static
+│  │  ├─css
+│  │  └─js
+│  └─views
+├─lor // 来至 github.com/sumory/lor
+│  └─lib
+│      ├─middleware
+│      ├─router
+│      └─utils
+└─pool // lua pool 库
+```
