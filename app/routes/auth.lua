@@ -29,7 +29,7 @@ authRouter:post("/login", function(req, res, next)
 end)
 
 authRouter:get("/logout", function(req, res, next)
-    req.cookie.set({Name = "username", Value = ""})
+    req.cookie.set({Name = "username", Value = "", Path="/"})
     res:redirect("/auth/login")
 end)
 

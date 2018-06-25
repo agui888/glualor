@@ -3,6 +3,8 @@ local cookie_middleware = require("lor.lib.middleware.cookie")
 local check_login_middleware = require("app.middleware.check_login")
 local whitelist = require("app.config.config").whitelist
 local router = require("app.router")
+
+-- 全局 app 对象, Golang 通过调用app.run来处理每个请求
 app = lor()
 
 app:conf("view enable", true)

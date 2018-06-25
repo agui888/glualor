@@ -13,7 +13,7 @@ var luaPool = pool.New(func() *lua.LState {
 	L := lua.NewState()
 	luajson.Preload(L)
 	L.PreloadModule("template", gluatemplate.Loader)
-	if err := L.DoFile("./app/main.lua"); err != nil {
+	if err := L.DoFile("main.lua"); err != nil { // 加载 lua 代码
 		panic(err)
 	}
 	return L
@@ -25,7 +25,7 @@ func ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		luaPool.Put(L)
 	}()
 	ctx := gluaweb.NewWebContext(w, r).WebContext(L)
-	L.SetGlobal("gluaweb", ctx)
+	L.SetGlobal("gluaweb", ctx) // 传入 web 上下文
 	app := L.GetGlobal("app")
 	if err := L.CallByParam(lua.P{
 		Fn:      L.GetField(app, "run"),
