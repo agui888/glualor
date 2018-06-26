@@ -21,9 +21,7 @@ var luaPool = pool.New(func() *lua.LState {
 
 func ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	L := luaPool.Get()
-	defer func() {
-		luaPool.Put(L)
-	}()
+	defer luaPool.Put(L)
 	ctx := gluaweb.NewWebContext(w, r).WebContext(L)
 	L.SetGlobal("gluaweb", ctx) // 传入 web 上下文
 	app := L.GetGlobal("app")
